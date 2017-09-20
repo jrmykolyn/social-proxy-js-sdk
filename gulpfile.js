@@ -4,13 +4,14 @@
 // Node
 
 // Vendor
-var gulp = require( 'gulp' );
-var concat = require( 'gulp-concat' );
-var ts = require( 'gulp-typescript' );
+const gulp = require( 'gulp' );
+const concat = require( 'gulp-concat' ); /// TODO[@jrmykolyn]: Remove assignment. Remove from `package.json`.
+const ts = require( 'gulp-typescript' );
 
 // --------------------------------------------------
 // DECLARE VARS
 // --------------------------------------------------
+var tsProject = ts.createProject( './tsconfig.json' );
 
 // --------------------------------------------------
 // DEFINE TASKS
@@ -24,8 +25,8 @@ gulp.task( 'default', [ 'build' ] );
  * Function compiles all source files (TypeScript) into distributable JavaScript files.
  */
 gulp.task( 'build', function() {
-	gulp.src( './src/**/*.ts' )
-		.pipe( ts() )
-		.pipe( concat( 'main.js' ) )
-		.pipe( gulp.dest( './dist' ) );
+	var tsResult = gulp.src( './src/**/*.ts' )
+		.pipe( tsProject() );
+
+		return tsResult.js.pipe( gulp.dest( './dist' ) );
 } );
