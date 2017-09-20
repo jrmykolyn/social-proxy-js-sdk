@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/jrmykolyn/social-proxy-js-sdk/issues"
   },
-  "homepage": "https://github.com/jrmykolyn/social-proxy-js-sdk#readme"
+  "homepage": "https://github.com/jrmykolyn/social-proxy-js-sdk#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-typescript": "^3.2.2",
+    "typescript": "^2.5.2"
+  },
+  "dependencies": {}
 }
