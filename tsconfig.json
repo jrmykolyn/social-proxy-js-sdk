@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+
+    "target": "es5",
+    "module": "none",
+    "allowJs": false,
+    "checkJs": false,
+    "jsx": "preserve",
+    "declaration": true,
+    "sourceMap": true,
+    "removeComments": true,
+    "noEmit": false,
+    "importHelpers": true,
+    "downlevelIteration": true,
+
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+
+    "moduleResolution": "node",
+    "baseUrl": "./src",
+    "paths": {},
+    "rootDirs": [],
+    "typeRoots": [],
+    "types": [],
+    "allowSyntheticDefaultImports": true,
+    "preserveSymlinks": true
+
+  }
+}
