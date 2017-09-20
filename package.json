@@ -1,0 +1,19 @@
+{
+  "name": "social-proxy-js-sdk",
+  "version": "0.0.0",
+  "description": "Social Proxy JS SDK provides a JavaScript based interface through which websites can access the Social Proxy service.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jrmykolyn/social-proxy-js-sdk.git"
+  },
+  "author": "Jesse R Mykolyn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jrmykolyn/social-proxy-js-sdk/issues"
+  },
+  "homepage": "https://github.com/jrmykolyn/social-proxy-js-sdk#readme"
+}
