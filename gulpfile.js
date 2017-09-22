@@ -5,6 +5,9 @@
 
 // Vendor
 const gulp = require( 'gulp' );
+const browserify = require( 'browserify' );
+const tsify = require( 'tsify' );
+const source = require( 'vinyl-source-stream' );
 const concat = require( 'gulp-concat' ); /// TODO[@jrmykolyn]: Remove assignment. Remove from `package.json`.
 const ts = require( 'gulp-typescript' );
 
@@ -22,11 +25,19 @@ var tsProject = ts.createProject( './tsconfig.json' );
 gulp.task( 'default', [ 'build' ] );
 
 /**
- * Function compiles all source files (TypeScript) into distributable JavaScript files.
+ * Function compiles source files (TypeScript) into distributable JavaScript files.
  */
 gulp.task( 'build', function() {
-	var tsResult = gulp.src( './src/**/*.ts' )
-		.pipe( tsProject() );
-
-		return tsResult.js.pipe( gulp.dest( './dist' ) );
+	return browserify( {
+		basedir: '.',
+		debug: true,
+		entries: [ 'src/main.ts' ],
+		cache: {},
+		packageCache: {}
+	} )
+		.plugin( tsify )
+		.bundle()
+		.pipe( source( 'bundle.js' ) )
+		.on( 'error', function( err ) { console.log( err.toString() ); } )
+		.pipe( gulp.dest( './dist' ) );
 } );
