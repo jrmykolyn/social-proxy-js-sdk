@@ -4,7 +4,7 @@
 		return;
 	}
 
-	class SocialProxy {
+	class InstagramModule {
 		constructor() {
 
 		}
@@ -17,7 +17,7 @@
 		 * @param {Object} options
 		 * @return {Promise}
 		 */
-		instagram( handle: string, options: any = {} ): void {
+		fetch( handle: string, options: any = {} ) {
 			return new Promise( ( resolve, reject ) => {
 				var query = options.query || {};
 				var queryString = Object.keys( query ).map( ( key ) => { return `${key}=${query[ key ]}`; } ).join( '&' );
@@ -28,7 +28,9 @@
 
 				req.onreadystatechange = function() {
 					if ( this.readyState === 4 ) {
-						if ( parseInt( this.status, 10 ) === 200 ) {
+						var status: any = this.status;
+
+						if ( parseInt( status ) === 200 ) {
 							resolve( this.response );
 						} else {
 							reject( this.response || this.statusText );
@@ -38,6 +40,18 @@
 
 				req.send();
 			} );
+		}
+	}
+
+	interface SocialProxyInterface {
+		instagram: InstagramModule
+	}
+
+	class SocialProxy implements SocialProxyInterface {
+		public instagram: InstagramModule;
+
+		constructor() {
+			this.instagram = new InstagramModule();
 		}
 	};
 
