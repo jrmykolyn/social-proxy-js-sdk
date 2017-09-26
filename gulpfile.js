@@ -2,6 +2,7 @@
 // IMPORT MODULES
 // --------------------------------------------------
 // Node
+const fs = require( 'fs' );
 
 // Vendor
 const gulp = require( 'gulp' );
@@ -10,6 +11,10 @@ const tsify = require( 'tsify' );
 const source = require( 'vinyl-source-stream' );
 const concat = require( 'gulp-concat' ); /// TODO[@jrmykolyn]: Remove assignment. Remove from `package.json`.
 const ts = require( 'gulp-typescript' );
+
+// Project
+const pkg = JSON.parse( fs.readFileSync( './package.json', 'utf8' ) );
+const version = pkg.version;
 
 // --------------------------------------------------
 // DECLARE VARS
@@ -37,7 +42,7 @@ gulp.task( 'build', function() {
 	} )
 		.plugin( tsify )
 		.bundle()
-		.pipe( source( 'bundle.js' ) )
+		.pipe( source( `social-proxy-${version}.js` ) )
 		.on( 'error', function( err ) { console.log( err.toString() ); } )
 		.pipe( gulp.dest( './dist' ) );
 } );
