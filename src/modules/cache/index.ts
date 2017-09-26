@@ -20,7 +20,6 @@ export class CacheModule implements ModuleInterface {
 	 */
 	sanitizeTtl( ttl: number ): any {
 		return ( ttl && typeof ttl === 'number' ) ? ( new Date().getTime() + ttl ) : null;
-
 	}
 
 	/**
@@ -59,6 +58,26 @@ export class CacheModule implements ModuleInterface {
 	}
 
 	/**
+	 * Given a cache data object, function adds an `isExpired` flag to the `socialProxy` key.
+	 *
+	 * `isExprired` is true of the cache's `ttl` timestamp is less than the current moment. Otherwise, `isExpired` is false.
+	 *
+	 * @param {Object}
+	 * @return {Object}
+	 */
+	decorateCache( data: any = {} ): any {
+		if ( !data.socialProxy ) {
+			data.socialProxy = {};
+		}
+
+		if ( data.socialProxy.ttl && typeof data.socialProxy.ttl === 'number' ) {
+			data.socialProxy.isExpired = ( data.socialProxy.ttl < new Date().getTime() );
+		}
+
+		return data;
+	}
+
+	/**
 	 * Given an `options` object, function assembles a cache key and attempts to fetch the corresponding data.
 	 *
 	 * If the required arguments are missing, or the data does not exist, function returns `null`.
@@ -76,7 +95,7 @@ export class CacheModule implements ModuleInterface {
 
 		data = window.localStorage.getItem( key );
 
-		return ( data ) ? JSON.parse( data ) : data;
+		return ( data ) ? this.decorateCache( JSON.parse( data ) ) : data;
 	}
 
 	/**
