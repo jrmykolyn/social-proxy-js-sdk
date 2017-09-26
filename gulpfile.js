@@ -27,7 +27,7 @@ var tsProject = ts.createProject( './tsconfig.json' );
 /**
  * Wrapper around any/all tasks to be executed when `gulp` is run.
  */
-gulp.task( 'default', [ 'build', 'watch' ] );
+gulp.task( 'default', [ 'build', 'demo', 'watch' ] );
 
 /**
  * Function compiles source files (TypeScript) into distributable JavaScript files.
@@ -45,6 +45,20 @@ gulp.task( 'build', function() {
 		.pipe( source( `social-proxy-${version}.js` ) )
 		.on( 'error', function( err ) { console.log( err.toString() ); } )
 		.pipe( gulp.dest( './dist' ) );
+} );
+
+/**
+ * Function prepares/compiles to the demo file(s).
+ */
+gulp.task( 'demo', function() {
+	// Get the source file.
+	var demoSrc = fs.readFileSync( './demo/src/index.html', 'utf8' );
+
+	// Replace the Social Proxy script ref. Save result.
+	var demoDist = demoSrc.replace( /\{\{SOCIAL_PROXY_SCRIPT\}\}/gmi, `social-proxy-${version}.js` );
+
+	// Write new file to dist. directory.
+	fs.writeFileSync( `./demo/dist/index.html`, demoDist );
 } );
 
 /**
