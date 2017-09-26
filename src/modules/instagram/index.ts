@@ -34,7 +34,7 @@ export class InstagramModule implements ModuleInterface {
 			var req = null;
 
 			// Return data fetched from cache or make request for specified resource.
-			if ( cachedData ) {
+			if ( cachedData && !options.bustCache ) {
 				resolve( cachedData );
 				return;
 			} else {
