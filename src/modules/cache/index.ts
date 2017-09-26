@@ -11,7 +11,9 @@ export class CacheModule implements ModuleInterface {
 
 	// INSTANCE METHODS
 	/**
-	 * ...
+	 * Ensures that the `ttl` is a number; adds to current timestamp (in MS) to value provided.
+	 *
+	 * If `ttl` is missing/invalid, function returns `null`.
 	 *
 	 * @param {number} ttl
 	 * @return {number|null}
@@ -22,7 +24,7 @@ export class CacheModule implements ModuleInterface {
 	}
 
 	/**
-	 * ...
+	 * Returns the default `ttl` value (ie. 1 week from current moment, as MS).
 	 *
 	 * @return {number}
 	 */
@@ -31,7 +33,7 @@ export class CacheModule implements ModuleInterface {
 	}
 
 	/**
-	 * ...
+	 * Returns the Social Proxy cache prefix/namespace string.
 	 *
 	 * @return {string}
 	 */
@@ -40,7 +42,7 @@ export class CacheModule implements ModuleInterface {
 	}
 
 	/**
-	 * ...
+	 * Given an `options` object, function returns a valid Social Proxy cache key or falls back to `null`.
 	 *
 	 * @param {Object} options
 	 */
@@ -57,7 +59,9 @@ export class CacheModule implements ModuleInterface {
 	}
 
 	/**
-	 * ...
+	 * Given an `options` object, function assembles a cache key and attempts to fetch the corresponding data.
+	 *
+	 * If the required arguments are missing, or the data does not exist, function returns `null`.
 	 *
 	 * @param {Object} options
 	 * @param {Mixed|null}
@@ -76,7 +80,7 @@ export class CacheModule implements ModuleInterface {
 	}
 
 	/**
-	 * ...
+	 * Saves the `data` to the cache using the `options` provided.
 	 *
 	 * @param {Object} data
 	 * @param {Object} options
