@@ -21,6 +21,7 @@ export class InstagramModule implements ModuleInterface {
 		return new Promise( ( resolve, reject ) => {
 			var _this = this;
 			var query = options.query || {};
+			var ttl = options.ttl || null;
 			var queryString = Object.keys( query ).map( ( key ) => { return `${key}=${query[ key ]}`; } ).join( '&' );
 
 			/// TODO[@jrmykolyn]:
@@ -41,13 +42,13 @@ export class InstagramModule implements ModuleInterface {
 
 					if ( parseInt( status ) === 200 ) {
 
-						/// TODO[@jrmykolyn]:
-						// - Check options for `cache` vars.
-						// - Cache data if appropriate.
-						// - Set 'freshness' value.
-
 						if ( !!options.cache ) {
-							_this.ref.cache.setCache( this.response, { platform: 'instagram', handle: handle, url: url } );
+							_this.ref.cache.setCache( JSON.parse( this.response ), {
+								platform: 'instagram',
+								handle,
+								url,
+								ttl,
+							} );
 						}
 
 						resolve( this.response );
