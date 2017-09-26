@@ -20,45 +20,52 @@ export class InstagramModule implements ModuleInterface {
 	fetch( handle: string, options: any = {} ) {
 		return new Promise( ( resolve, reject ) => {
 			var _this = this;
+
 			var query = options.query || {};
 			var ttl = options.ttl || null;
 			var queryString = Object.keys( query ).map( ( key ) => { return `${key}=${query[ key ]}`; } ).join( '&' );
 
-			/// TODO[@jrmykolyn]:
-			// - Hash request URL.
-			// - Check cache for matching data.
-			// - Check 'freshness'.
-			// - Resolve Promise with cached data if appropriate.
-
-			var req = new XMLHttpRequest();
-
+			// Construct request endpoint.
 			var url = `https://social-proxy.herokuapp.com/instagram/${handle}?${queryString}`;
 
-			req.open( 'GET', url );
+			// Check if requested data has been fetched/cached.
+			var cachedData = _this.ref.cache.getCache( { platform: 'instagram', handle, url } );
 
-			req.onreadystatechange = function() {
-				if ( this.readyState === 4 ) {
-					var status: any = this.status;
+			var req = null;
 
-					if ( parseInt( status ) === 200 ) {
+			// Return data fetched from cache or make request for specified resource.
+			if ( cachedData ) {
+				resolve( cachedData );
+				return;
+			} else {
+				req = new XMLHttpRequest();
 
-						if ( !!options.cache ) {
-							_this.ref.cache.setCache( JSON.parse( this.response ), {
-								platform: 'instagram',
-								handle,
-								url,
-								ttl,
-							} );
+				req.open( 'GET', url );
+
+				req.onreadystatechange = function() {
+					if ( this.readyState === 4 ) {
+						var status: any = this.status;
+
+						if ( parseInt( status ) === 200 ) {
+
+							if ( !!options.cache ) {
+								_this.ref.cache.setCache( JSON.parse( this.response ), {
+									platform: 'instagram',
+									handle,
+									url,
+									ttl,
+								} );
+							}
+
+							resolve( JSON.parse( this.response ) );
+						} else {
+							reject( this.response || this.statusText );
 						}
-
-						resolve( this.response );
-					} else {
-						reject( this.response || this.statusText );
 					}
 				}
-			}
 
-			req.send();
+				req.send();
+			}
 		} );
 	}
 }
