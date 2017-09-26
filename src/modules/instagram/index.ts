@@ -33,8 +33,12 @@ export class InstagramModule implements ModuleInterface {
 
 			var req = null;
 
-			// Return data fetched from cache or make request for specified resource.
-			if ( cachedData && !options.bustCache ) {
+			// Return cached data if:
+			// - 'bust cache' set to false.
+			// - data exists.
+			// - data is not expired.
+			// Otherwise, fetch new data.
+			if ( !options.bustCache && cachedData && !cachedData.socialProxy.isExpired ) {
 				resolve( cachedData );
 				return;
 			} else {
