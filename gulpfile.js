@@ -11,10 +11,13 @@ const tsify = require( 'tsify' );
 const source = require( 'vinyl-source-stream' );
 const concat = require( 'gulp-concat' ); /// TODO[@jrmykolyn]: Remove assignment. Remove from `package.json`.
 const ts = require( 'gulp-typescript' );
+const typedoc= require( 'gulp-typedoc' );
 
 // Project
 const pkg = JSON.parse( fs.readFileSync( './package.json', 'utf8' ) );
 const version = pkg.version;
+
+const tsConfig = JSON.parse( fs.readFileSync( './tsconfig.json', 'utf8' ) );
 
 // --------------------------------------------------
 // DECLARE VARS
@@ -59,6 +62,16 @@ gulp.task( 'demo', function() {
 
 	// Write new file to dist. directory.
 	fs.writeFileSync( `./demo/dist/index.html`, demoDist );
+} );
+
+/**
+ * ...
+ */
+gulp.task( 'docs', function() {
+	const options = Object.assign( tsConfig.compilerOptions, { out: './docs' } );
+
+	return gulp.src( './src' )
+		.pipe( typedoc( options ) );
 } );
 
 /**
