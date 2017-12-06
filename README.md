@@ -11,13 +11,21 @@
 Social Proxy JS SDK provides a JavaScript based interface through which websites can access the Social Proxy service.
 
 ## Installation
-/// TODO
+Social Proxy JS SDK can be installed via npm using the following command:
+
+```
+npm install --save social-proxy-js-sdk
+```
 
 ## Setup
-/// TODO
+### Option 1
+Migrate the `social-proxy.js` script (located in `dist/`) into your project's dedicated scripts directory; reference it via a `<script>` tag.
+
+### Option 2
+Add the contents of `social-proxy.js` to your project's `bundle.js` file (or similar) by importing it into the script manifest and running your build process/tools. Please note: at the time of writing, this method is untested.
 
 ## Usage
-/// TODO
+When setup correctly, `social-proxy.js` adds the `socialProxy` object to the global context (eg. `window`). See the documentation section for API usage details.
 
 ## Documentation
 Documentation for Social Proxy JS SDK can be viewed by opening `docs/index.html` in a browser.
