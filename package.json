@@ -1,6 +1,6 @@
 {
   "name": "social-proxy-js-sdk",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Social Proxy JS SDK provides a JavaScript based interface through which websites can access the Social Proxy service.",
   "main": "dist/social-proxy.js",
   "scripts": {
