@@ -11,7 +11,7 @@ export class InstagramModule implements ModuleInterface {
 
 	// INSTANCE METHODS
 	/**
-	 * Function fetches a given Instagram feed from the Social Proxy API, returns the result as a Promise
+	 * Function fetches a given Instagram feed from the Social Proxy API, returns the result as a Promise.
 	 *
 	 * @param {string} handle - The Instagram handle/feed to fetch.
 	 * @param {Object} options

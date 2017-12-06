@@ -60,7 +60,7 @@ export class CacheModule implements ModuleInterface {
 	/**
 	 * Given a cache data object, function adds an `isExpired` flag to the `socialProxy` key.
 	 *
-	 * `isExprired` is true of the cache's `ttl` timestamp is less than the current moment. Otherwise, `isExpired` is false.
+	 * `isExpired` is true if the cache's `ttl` timestamp is less than the current moment. Otherwise, `isExpired` is false.
 	 *
 	 * @param {Object}
 	 * @return {Object}
