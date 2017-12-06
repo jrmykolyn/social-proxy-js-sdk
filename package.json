@@ -19,7 +19,6 @@
   "devDependencies": {
     "browserify": "^14.4.0",
     "gulp": "^3.9.1",
-    "gulp-concat": "^2.6.1",
     "gulp-typedoc": "^2.1.0",
     "gulp-typescript": "^3.2.2",
     "tsify": "^3.0.3",
