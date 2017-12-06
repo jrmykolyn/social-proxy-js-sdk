@@ -9,13 +9,10 @@ const gulp = require( 'gulp' );
 const browserify = require( 'browserify' );
 const tsify = require( 'tsify' );
 const source = require( 'vinyl-source-stream' );
-const concat = require( 'gulp-concat' ); /// TODO[@jrmykolyn]: Remove assignment. Remove from `package.json`.
 const ts = require( 'gulp-typescript' );
 const typedoc= require( 'gulp-typedoc' );
 
 // Project
-const pkg = JSON.parse( fs.readFileSync( './package.json', 'utf8' ) );
-const version = pkg.version;
 
 const tsConfig = JSON.parse( fs.readFileSync( './tsconfig.json', 'utf8' ) );
 
@@ -45,7 +42,7 @@ gulp.task( 'build', function() {
 	} )
 		.plugin( tsify )
 		.bundle()
-		.pipe( source( `social-proxy-${version}.js` ) )
+		.pipe( source( `social-proxy.js` ) )
 		.on( 'error', function( err ) { console.log( err.toString() ); } )
 		.pipe( gulp.dest( './dist' ) );
 } );
@@ -54,18 +51,11 @@ gulp.task( 'build', function() {
  * Function prepares/compiles to the demo file(s).
  */
 gulp.task( 'demo', function() {
-	// Get the source file.
-	var demoSrc = fs.readFileSync( './demo/src/index.html', 'utf8' );
-
-	// Replace the Social Proxy script ref. Save result.
-	var demoDist = demoSrc.replace( /\{\{SOCIAL_PROXY_SCRIPT\}\}/gmi, `social-proxy-${version}.js` );
-
-	// Write new file to dist. directory.
-	fs.writeFileSync( `./demo/dist/index.html`, demoDist );
+	/// TODO
 } );
 
 /**
- * ...
+ * Function compiles Social Proxy module documentation into a static site.
  */
 gulp.task( 'docs', function() {
 	const options = Object.assign( tsConfig.compilerOptions, { out: './docs' } );
