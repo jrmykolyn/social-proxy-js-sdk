@@ -1,3 +1,4 @@
+import { endpoints } from '../../config';
 import { ModuleInterface } from '../../interfaces';
 
 export class SlackModule implements ModuleInterface {
@@ -11,7 +12,9 @@ export class SlackModule implements ModuleInterface {
 
 	// INSTANCE METHODS
 	/**
-	 * ...
+	 * Given a `handle` string, method sends a POST request to the corresponding Social Proxy endpoint and returns the result as a Promise.
+	 *
+	 * The method must be invoked with an `options` object, which in turn must include a 'text' key.
 	 *
 	 * @param {string} handle
 	 * @return {Promise}
@@ -31,7 +34,7 @@ export class SlackModule implements ModuleInterface {
 				return;
 			}
 
-			let url = `https://social-proxy.herokuapp.com/slack/${handle}?text=${text}`; /// TODO: Move 'host' to config.
+			let url = `${endpoints.slack}/${handle}?text=${text}`;
 			let requestConfig = {
 				method: 'POST',
 			};
