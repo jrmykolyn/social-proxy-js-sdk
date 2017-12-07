@@ -3,6 +3,7 @@
 // --------------------------------------------------
 import { InstagramModule } from './modules/instagram';
 import { CacheModule } from './modules/cache';
+import { SlackModule } from './modules/slack';
 import { SocialProxyInterface } from './interfaces';
 
 ( function( window: any ) {
@@ -14,10 +15,12 @@ import { SocialProxyInterface } from './interfaces';
 	class SocialProxy implements SocialProxyInterface {
 		public instagram: InstagramModule;
 		public cache: CacheModule;
+		public slack: SlackModule;
 
 		constructor() {
 			this.instagram = new InstagramModule( { ref: this } );
 			this.cache = new CacheModule( { ref: this } );
+			this.slack = new SlackModule( { ref: this } );
 		}
 	};
 
