@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ### Changed
 - Updated `InstagramModule`: read in endpoint from config.
+- Updated `InstagramModule`: replace use of `XMLHttpRequest` with `fetch`.
 
 ## [0.1.0] - 2017-12-06
 ### Added
