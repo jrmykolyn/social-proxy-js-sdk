@@ -14,7 +14,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [0.1.0] - 2017-12-06
 ### Added
-- Complete first pass of `social-proxy.js`, including: `InstagramModule`; `CacheModule`.
+- Completed first pass of `social-proxy.js`, including: `InstagramModule`; `CacheModule`.
 - Completed first pass of `demo/`.
 - Completed first pass of `docs/`.
 - Added configuration and setup files to project: `README.md`; `CHANGELOG.md`; `package.json`; `.gitignore`.
