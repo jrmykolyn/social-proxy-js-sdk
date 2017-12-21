@@ -1,3 +1,4 @@
+import { endpoints } from '../../config';
 import { ModuleInterface } from '../../interfaces';
 
 export class InstagramModule implements ModuleInterface {
@@ -26,7 +27,7 @@ export class InstagramModule implements ModuleInterface {
 			var queryString = Object.keys( query ).map( ( key ) => { return `${key}=${query[ key ]}`; } ).join( '&' );
 
 			// Construct request endpoint.
-			var url = `https://social-proxy.herokuapp.com/instagram/${handle}?${queryString}`;
+			var url = `${endpoints.instagram}/${handle}?${queryString}`;
 
 			// Check if requested data has been fetched/cached.
 			var cachedData = _this.ref.cache.getCache( { platform: 'instagram', handle, url } );
