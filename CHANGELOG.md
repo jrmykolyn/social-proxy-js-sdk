@@ -9,7 +9,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - Added `tslib` to dependencies.
 
 ### Changed
-- ...
+- Updated `InstagramModule`: read in endpoint from config.
 
 ## [0.1.0] - 2017-12-06
 ### Added
